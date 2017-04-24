@@ -3,6 +3,7 @@ const { dirname, join, resolve } = require('path');
 const protocolServe = require('electron-protocol-serve');
 
 const axios = require('axios');
+const superagent = require('superagent');
 
 let mainWindow = null;
 
@@ -17,12 +18,7 @@ global.checkUrl = function(url) {
 };
 
 global.sendEmailNotification = function(site, settings) {
-  return axios.post(`https://api.mailgun.net/v3/${settings.emailDomain}/messages`, {
-      from: settings.emailRecipient,
-      to: settings.emailRecipient,
-      subject: `Fireminder: ${site.url} is down`,
-      text: `The site appears to be down.`        
-    }, {
+  return axios.post(`https://api.mailgun.net/v3/${settings.emailDomain}/messages`, {}, {
       auth: {
         username: 'api',
         password: settings.emailKey
@@ -44,6 +40,70 @@ global.sendEmailNotification = function(site, settings) {
     .catch((error) => {
       return { error };
     })
+};
+
+global.sendSMSNotification = function(site, settings) {
+
+  // TODO: Investigate why this code failed, possibly submit bug report to axios github.
+  // Committing to repo to have a record of it to fetch later. Remove on next commit
+  // This request was failing in a way that seemed consistent with not having the Content-Type set properly.
+  // However, when logging the response, it was showing that the header was actually set as expected.
+  // Regardless, this did not work, but the very similar superagent code below did.
+  // return axios.post(`https://api.twilio.com/2010-04-01/Accounts/${settings.smsTwilioId}/Messages.json`, {}, {
+  //     headers: {
+  //       'Content-type': 'application/x-www-form-urlencoded'
+  //     },
+  //     auth: {
+  //       username: settings.smsTwilioId,
+  //       password: settings.smsTwilioToken,
+  //     },
+  //     data: {
+  //       To: settings.smsRecipient,
+  //       From: settings.smsSender,
+  //       Body: `Fireminder: ${site.url} is down.`,
+  //     },
+  //   })
+  //   .then((response) => {
+  //     if(response.status === 200) {
+  //       return {success: true};
+  //     } else {
+  //       console.log('non200 response: ', response)
+  //       return { error: response };
+  //     }
+  //   })
+  //   .catch((error) => {
+  //     console.log('error: ', error);
+  //     return { error };
+  //   })
+
+  return new Promise(function(resolve, reject) {
+    try {
+      superagent
+        .post(`https://api.twilio.com/2010-04-01/Accounts/${settings.smsTwilioId}/Messages.json`)
+        .auth(settings.smsTwilioId, settings.smsTwilioToken)
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+          To: settings.smsRecipient,
+          From: settings.smsSender,
+          Body: `Fireminder: ${site.url} is down.`,
+        })
+        .end(function(error, response) {
+          if(error) {
+            reject({ error });
+          }
+          if(response.statusCode < 300) {
+            resolve(response.body);
+          } else {
+            reject({error: response });
+          }
+        });
+
+    } catch(error) {
+      reject({ error });
+    }
+  });
+
+
 };
 
 // Registering a protocol & schema to serve our Ember application

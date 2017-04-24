@@ -41,7 +41,6 @@ export default Ember.Component.extend({
       }
 
       if(settings.enableEmailNotifications) {
-        // send email
         remote.getGlobal('sendEmailNotification')(site, settings)
           .then((response) => {
             console.log('sendEmailNotification response: ', response);
@@ -50,10 +49,10 @@ export default Ember.Component.extend({
 
       if(settings.enableSMSNotifications) {
         // send SMS
-        // remote.getGlobal('sendSMSNotification')(this.get('settings'))
-        //   .then(() => {
-
-        //   })
+        remote.getGlobal('sendSMSNotification')(site, this.get('settings').content)
+          .then((response) => {
+            console.log('sendSMSNotification response: ', response);
+          })
       }
 
     }
