@@ -1,0 +1,16 @@
+@mixin clearfix {
+  &:after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+
+@mixin common-button {
+  background: $orange;
+  color: $light-yellow;
+
+  &:hover {
+    background: darken($orange, 5);
+  }
+}

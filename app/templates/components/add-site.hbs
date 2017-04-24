@@ -1,0 +1,61 @@
+<div class="add-site sidebar-menu">
+  <form class="ui inverted form" {{action 'addSite' on="submit"}}>
+    <h2 class="menu-title">Add Site</h2>
+    <div class="field">
+      <label class="sr-only">Scheme</label>
+      <div class="two ui buttons add-site-scheme-buttons">
+        <button class="ui button {{if isHttps 'selected blue'}}" type="button" {{action 'setScheme' 'https'}}>
+          {{#if isHttps}}
+            <i class="checkmark icon"></i>
+          {{/if}}
+          HTTPS
+        </button>
+        <button class="ui button {{unless isHttps 'selected blue'}}" type="button" {{action 'setScheme' 'http'}}>
+          {{#unless isHttps}}
+            <i class="checkmark icon"></i>
+          {{/unless}}
+          HTTP
+        </button>
+      </div>
+    </div>
+    <div class="field">
+      <label for="add-site-url">URL</label>
+      {{#if invalidUrl}}
+        <div class="input-error">
+          The url seems to be invalid.
+        </div>
+      {{/if}}
+      {{
+        input
+        type="text"
+        name="add-site-url"
+        id="add-site-url"
+        placeholder="www.example.com"
+        value=url
+        key-up=validateForm
+      }}
+    </div>
+    <div class="field">
+      <label for="add-site-timer">Timer (hours)</label>
+      {{#if invalidTimer}}
+        <div class="input-error">
+          The timer value must be an integer in the range of 1 through 24.
+        </div>
+      {{/if}}
+      {{
+        input
+        type="number"
+        name="add-site-timer"
+        id="add-site-timer"
+        min="1"
+        max="24"
+        value=timer
+        key-up=validateForm
+      }}
+    </div>
+    <div class="add-site-buttons">
+      <button type="button" class="ui inverted button red cancel" {{action 'cancel'}}>Cancel</button>
+      <button type="submit" class="ui inverted button green submit">Submit</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,111 @@
+<div class="settings sidebar-menu">
+  <form class="ui inverted form" {{action 'saveSettings' on="submit"}}>
+    <h2 class="menu-title">Notifications</h2>
+
+    <div class="field">
+      <div class="ui toggle checkbox">
+        {{input type="checkbox" name="enable-desktop-notifications" checked=enableDesktopNotifications}}
+        <label>Desktop</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="ui toggle checkbox">
+        {{input type="checkbox" name="enable-email-notifications" checked=enableEmailNotifications }}
+        <label>Email (via Mailgun)</label>
+      </div>
+    </div>
+
+
+    {{#if enableEmailNotifications}}   
+      <div class="field">
+        <label for="email-notifications-recipient">Recipient</label>
+        {{
+          input
+          type="email"
+          name="email-notifications-recipient"
+          id="email-notifications-recipient"
+          placeholder="person@example.com"
+          value=emailRecipient
+        }}
+      </div>
+      <div class="field">
+        <label for="email-notifications-domain">Domain</label>
+        {{
+          input
+          type="text"
+          name="email-notifications-domain"
+          id="email-notifications-domain"
+          placeholder="example.com"
+          value=emailDomain
+        }}
+      </div>
+      <div class="field">
+        <label for="email-notifications-domain">API Key</label>
+        {{
+          input
+          type="text"
+          name="email-notifications-key"
+          id="email-notifications-key"
+          value=emailKey
+        }}
+      </div>
+    {{/if}}
+
+    <div class="field">
+      <div class="ui toggle checkbox">
+        {{input type="checkbox" name="enable-sms-notifications" checked=enableSMSNotifications }}
+        <label>SMS (via Twilio)</label>
+      </div>
+    </div>
+
+
+    {{#if enableSMSNotifications}}   
+      <div class="field">
+        <label for="sms-notifications-recipient">Recipient Phone</label>
+        {{
+          input
+          type="tel"
+          name="sms-notifications-recipient"
+          id="sms-notifications-recipient"
+          value=smsRecipient
+        }}
+      </div>
+      <div class="field">
+        <label for="sms-notifications-sender">Sender Phone</label>
+        {{
+          input
+          type="tel"
+          name="sms-notifications-sender"
+          id="sms-notifications-sender"
+          value=smsSender
+        }}
+      </div>
+      <div class="field">
+        <label for="sms-notifications-twilio-id">Twilio Id</label>
+        {{
+          input
+          type="text"
+          name="sms-notifications-twilio-id"
+          id="sms-notifications-twilio-id"
+          value=smsTwilioId
+        }}
+      </div>
+      <div class="field">
+        <label for="sms-notifications-token">Auth Token</label>
+        {{
+          input
+          type="text"
+          name="sms-notifications-token"
+          id="sms-notifications-token"
+          value=smsTwilioToken
+        }}
+      </div>
+    {{/if}}
+
+    <div class="add-site-buttons">
+      <button type="button" class="ui inverted button red cancel" {{action 'cancel'}}>Cancel</button>
+      <button type="submit" class="ui inverted button green submit">Save</button>
+    </div>
+  </form>
+</div>

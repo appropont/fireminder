@@ -2,7 +2,49 @@ const { app, BrowserWindow, protocol } = require('electron');
 const { dirname, join, resolve } = require('path');
 const protocolServe = require('electron-protocol-serve');
 
+const axios = require('axios');
+
 let mainWindow = null;
+
+global.checkUrl = function(url) {
+  return axios.get(url)
+    .then((response) => {
+      return response.status === 200;
+    })
+    .catch((error) => {
+      return false;
+    });
+};
+
+global.sendEmailNotification = function(site, settings) {
+  return axios.post(`https://api.mailgun.net/v3/${settings.emailDomain}/messages`, {
+      from: settings.emailRecipient,
+      to: settings.emailRecipient,
+      subject: `Fireminder: ${site.url} is down`,
+      text: `The site appears to be down.`        
+    }, {
+      auth: {
+        username: 'api',
+        password: settings.emailKey
+      },
+      params: {
+        from: settings.emailRecipient,
+        to: settings.emailRecipient,
+        subject: `Fireminder: ${site.url} is down`,
+        text: `The site appears to be down.`        
+      }
+    })
+    .then((response) => {
+      if(response.status === 200) {
+        return {success: true};
+      } else {
+        return {error: response};
+      }
+    })
+    .catch((error) => {
+      return { error };
+    })
+};
 
 // Registering a protocol & schema to serve our Ember application
 protocol.registerStandardSchemes(['serve'], { secure: true });
@@ -29,12 +71,14 @@ app.on('window-all-closed', () => {
 
 app.on('ready', () => {
   mainWindow = new BrowserWindow({
-    width: 800,
+    width: 320,
     height: 600,
-  });
+    frame: false
+    //titleBarStyle: 'hidden-inset'
+});
 
   // If you want to open up dev tools programmatically, call
-  // mainWindow.openDevTools();
+  mainWindow.openDevTools();
 
   const emberAppLocation = 'serve://dist';
 

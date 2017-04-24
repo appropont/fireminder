@@ -1,0 +1,30 @@
+.status-icon.icon {
+
+  font-size: 1.5rem;
+  vertical-align: sub;
+
+  &.up {
+    color: green;
+  }
+
+  &.down {
+    color: $red;
+  }
+
+  &.loading {
+    color: blue;
+  }
+
+  &.error {
+    color: $red;
+  }
+
+}
+
+.ui.list > .item > .main-list-item-content.content {
+  line-height: 3.1415em; 
+}
+
+.ui.button.actions-button {
+  @include common-button;
+}

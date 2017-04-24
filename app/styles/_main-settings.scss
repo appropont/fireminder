@@ -1,0 +1,4 @@
+.ui.toggle.checkbox input:checked ~ label,
+.ui.toggle.checkbox input:focus:checked ~ label {
+  color: rgba(255, 255, 255, 0.9) !important;
+}

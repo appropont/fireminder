@@ -1,0 +1,26 @@
+<div class="ui pushable segment component context">
+  {{#ui-sidebar class="inverted menu left inline vertical" context=".component.context" id="settings-sidebar"}}
+    {{#main-settings settings=settings save=(action 'saveSettings') cancel=(action 'toggle' 'settings-sidebar')}}{{/main-settings}}
+  {{/ui-sidebar}}
+  {{#ui-sidebar class="inverted menu right inline vertical" context=".component.context" id="add-site-sidebar"}}
+    {{#add-site addSite=(action 'addSite') cancel=(action 'toggle' 'add-site-sidebar')}}{{/add-site}}
+  {{/ui-sidebar}}
+  <div class="pusher" style="min-height: 598px;">
+    <div class="main-action-items">
+      <button class="show-settings-button ui icon button" {{action 'toggle' 'settings-sidebar'}} title="Settings">
+        <i class="setting icon"></i>
+      </button>
+      <span class="app-title"><i class="fire icon"></i>FireMinder</span>
+      <button class="show-add-site-button ui icon button" {{action 'toggle' 'add-site-sidebar'}} title="Add Site">
+        <i class="plus icon"></i>
+      </button>
+    </div>
+    <div class="sites-list ui relaxed divided list">
+      {{#each sites as |site|}}
+          {{#sites-list-item class="sites-list-item item" site=site removeSite=(action 'removeSite') updateSite=(action 'updateSite') sendNotifications=(action 'sendNotifications')}}{{/sites-list-item}}
+      {{else}}
+        <div class="item empty">No Sites found. Add one.</div>
+      {{/each}}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+body {
+  -webkit-app-region: drag;
+  -webkit-user-select: none;
+  background: $light-yellow;
+  //color: #fff;
+}
+
+.ui.segment {
+  //background: $primary-background;
+  background: $light-yellow;
+}
+
+.ui.inverted.menu {
+  background: $secondary-background;
+}
+
+button {
+  -webkit-app-region: drag;
+}
+
+.menu-title {
+  color: #fff;
+}
+
+.sidebar-menu {
+  padding: 5px;
+}

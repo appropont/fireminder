@@ -1,0 +1,17 @@
+<div class="right floated content">
+  {{#ui-dropdown class="ui floating dropdown top right pointing icon button actions-button"}}
+    <i class="ellipsis horizontal icon"></i>
+    <div class="menu">
+      <div class="item" {{action 'checkUrl'}}>
+        Check URL
+      </div>
+      <div class="item" {{action 'removeSite'}}>
+        Remove
+      </div>
+    </div>
+  {{/ui-dropdown}}
+</div>
+<div class="main-list-item-content middle aligned content">
+  <i class="status-icon {{statusIconClass}} icon {{statusClass}}"></i>
+  {{site.url}}
+</div>

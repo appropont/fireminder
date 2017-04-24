@@ -1,0 +1,36 @@
+.sites-list.list {
+  padding: 5px;
+}
+
+.item.empty {
+  text-align: center;
+}
+
+.main-action-items {
+  @include clearfix;
+  padding: 5px;
+  text-align: center;
+  background: $primary-background;
+  color: $light-yellow;
+
+  .button {
+    @include common-button;
+  }
+}
+
+.app-title {
+  font-size: 2rem;
+  font-weight: 500;
+  padding-top: 8px;
+  display: inline-block;
+}
+
+.show-settings-button {
+  float: left;
+  -webkit-app-region: no-drag;
+}
+
+.show-add-site-button {
+  float: right;
+  -webkit-app-region: no-drag;
+}

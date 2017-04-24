@@ -1,4 +1,7 @@
 {
   "name": "fireminder",
-  "dependencies": {}
+  "dependencies": {
+    "blob-polyfill": "^1.0.20150320",
+    "semantic-ui": "^2.2.10"
+  }
 }
