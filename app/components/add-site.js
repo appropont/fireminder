@@ -11,7 +11,6 @@ export default Ember.Component.extend({
       Ember.run.debounce(this, this.formIsValid(), 300);
     },
     setScheme(scheme) {
-      console.log('set scheme', scheme);
       this.set('scheme', scheme);
     },
     addSite() {

@@ -17,9 +17,14 @@
     </div>
 
 
-    {{#if enableEmailNotifications}}   
+    {{#if enableEmailNotifications}}
       <div class="field">
-        <label for="email-notifications-recipient">Recipient</label>
+        <label for="email-notifications-recipient">
+          Recipient
+          {{#if invalidEmailRecipient}}
+            <span class="input-error">Required</span>
+          {{/if}}
+        </label>
         {{
           input
           type="email"
@@ -30,7 +35,12 @@
         }}
       </div>
       <div class="field">
-        <label for="email-notifications-domain">Domain</label>
+        <label for="email-notifications-domain">
+          Domain
+          {{#if invalidEmailDomain}}
+            <span class="input-error">Required</span>
+          {{/if}}
+        </label>
         {{
           input
           type="text"
@@ -41,7 +51,12 @@
         }}
       </div>
       <div class="field">
-        <label for="email-notifications-domain">API Key</label>
+        <label for="email-notifications-key">
+          API Key
+          {{#if invalidEmailKey}}
+            <span class="input-error">Required</span>
+          {{/if}}
+        </label>
         {{
           input
           type="text"
@@ -62,7 +77,12 @@
 
     {{#if enableSMSNotifications}}   
       <div class="field">
-        <label for="sms-notifications-recipient">Recipient Phone</label>
+        <label for="sms-notifications-recipient">
+          Recipient Phone
+          {{#if invalidSMSRecipient}}
+            <span class="input-error">Required</span>
+          {{/if}}
+        </label>
         {{
           input
           type="tel"
@@ -72,7 +92,12 @@
         }}
       </div>
       <div class="field">
-        <label for="sms-notifications-sender">Sender Phone</label>
+        <label for="sms-notifications-sender">
+          Sender Phone
+          {{#if invalidSMSSender}}
+            <span class="input-error">Required</span>
+          {{/if}}
+        </label>
         {{
           input
           type="tel"
@@ -82,7 +107,12 @@
         }}
       </div>
       <div class="field">
-        <label for="sms-notifications-twilio-id">Twilio Id</label>
+        <label for="sms-notifications-twilio-id">
+          Twilio Id
+          {{#if invalidSMSTwilioId}}
+            <span class="input-error">Required</span>
+          {{/if}}
+        </label>
         {{
           input
           type="text"
@@ -92,7 +122,12 @@
         }}
       </div>
       <div class="field">
-        <label for="sms-notifications-token">Auth Token</label>
+        <label for="sms-notifications-token">
+          Auth Token
+          {{#if invalidSMSTwilioToken}}
+            <span class="input-error">Required</span>
+          {{/if}}
+        </label>
         {{
           input
           type="text"
@@ -105,7 +140,7 @@
 
     <div class="add-site-buttons">
       <button type="button" class="ui inverted button red cancel" {{action 'cancel'}}>Cancel</button>
-      <button type="submit" class="ui inverted button green submit">Save</button>
+      <button type="submit" class="ui inverted button green submit" disabled={{shouldDisableSave}}>Save</button>
     </div>
   </form>
 </div>

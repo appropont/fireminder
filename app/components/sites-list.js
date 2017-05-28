@@ -31,28 +31,21 @@ export default Ember.Component.extend({
       this.send('toggle', 'settings-sidebar');
     },
     sendNotifications(site) {
-      console.log('sending notifications');
       const settings = this.get('settings').content;
 
       if(settings.enableDesktopNotifications) {
         const notification = new Notification('Fireminder Alert', {
           body: `${site.url} is down.`
-        })
+        });
       }
 
       if(settings.enableEmailNotifications) {
-        remote.getGlobal('sendEmailNotification')(site, settings)
-          .then((response) => {
-            console.log('sendEmailNotification response: ', response);
-          });
+        remote.getGlobal('sendEmailNotification')(site, settings);
       }
 
       if(settings.enableSMSNotifications) {
         // send SMS
-        remote.getGlobal('sendSMSNotification')(site, this.get('settings').content)
-          .then((response) => {
-            console.log('sendSMSNotification response: ', response);
-          })
+        remote.getGlobal('sendSMSNotification')(site, settings);
       }
 
     }

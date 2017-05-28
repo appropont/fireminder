@@ -42,7 +42,6 @@ export default Ember.Component.extend({
     // perform check with node
     remote.getGlobal('checkUrl')(`${site.scheme}://${site.url}`)
       .then((isUp) => {
-        console.log('isUp?', isUp);
 
         // set status
         site.status = isUp === true ? statusClasses.UP : statusClasses.DOWN;
@@ -77,7 +76,6 @@ export default Ember.Component.extend({
   didInsertElement() {
 
     const site = this.get('site');
-    console.log('site: ', this.get('site'));
 
     this.set('statusClass', site.status);
 
@@ -90,7 +88,6 @@ export default Ember.Component.extend({
     }
   },
   didDestroyElement() {
-      console.log('did destroy site list item');
-      clearTimeout(this.get('timeout'));
+    clearTimeout(this.get('timeout'));
   },
 });

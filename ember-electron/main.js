@@ -7,6 +7,8 @@ const superagent = require('superagent');
 
 let mainWindow = null;
 
+// Functions to be called from inside of the Ember app.
+// Might be good to extract them to a separate file.
 global.checkUrl = function(url) {
   return axios.get(url)
     .then((response) => {
@@ -133,8 +135,7 @@ app.on('ready', () => {
   mainWindow = new BrowserWindow({
     width: 320,
     height: 600,
-    frame: false
-    //titleBarStyle: 'hidden-inset'
+    frame: false,
 });
 
   // If you want to open up dev tools programmatically, call
@@ -152,16 +153,16 @@ app.on('ready', () => {
   });
 
   mainWindow.webContents.on('crashed', () => {
-    console.log('Your Ember app (or other code) in the main window has crashed.');
-    console.log('This is a serious issue that needs to be handled and/or debugged.');
+    console.error('Your Ember app (or other code) in the main window has crashed.');
+    console.error('This is a serious issue that needs to be handled and/or debugged.');
   });
 
   mainWindow.on('unresponsive', () => {
-    console.log('Your Ember app (or other code) has made the window unresponsive.');
+    console.warn('Your Ember app (or other code) has made the window unresponsive.');
   });
 
   mainWindow.on('responsive', () => {
-    console.log('The main window has become responsive again.');
+    console.warn('The main window has become responsive again.');
   });
 
   mainWindow.on('closed', () => {
@@ -185,7 +186,7 @@ app.on('ready', () => {
 // resources (e.g. file descriptors, handles, etc) before shutting down the process. It is
 // not safe to resume normal operation after 'uncaughtException'.
 process.on('uncaughtException', (err) => {
-  console.log('An exception in the main thread was not handled.');
-  console.log('This is a serious issue that needs to be handled and/or debugged.');
-  console.log(`Exception: ${err}`);
+  console.error('An exception in the main thread was not handled.');
+  console.error('This is a serious issue that needs to be handled and/or debugged.');
+  console.error(`Exception: ${err}`);
 });
