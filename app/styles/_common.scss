@@ -5,6 +5,10 @@ body {
   //color: #fff;
 }
 
+input, button {
+  -webkit-app-region: no-drag;
+}
+
 .ui.segment {
   //background: $primary-background;
   background: $light-yellow;
