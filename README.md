@@ -1,7 +1,18 @@
-# fireminder
+# Fireminder
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+Fireminder is a simple desktop application that watches urls and makes sure they are accessible.
+
+There are existing paid services that provide more robust features, functionality, and reliability. You are strongly encouraged to consider them for your use case.
+
+Sometimes, however, you just need something fairly simple (and free). That is this.
+
+## Releases
+This repo is for the development version of Fireminder.
+
+If you would like to just download the application and run it, you can find OS specific packages at [https://appropont.com/projects/fireminder](https://appropont.com/projects/fireminder)
+
+
+# Development
 
 ## Prerequisites
 
@@ -15,38 +26,32 @@ You will need the following things properly installed on your computer.
 
 ## Installation
 
-* `git clone <repository-url>` this repository
+* `git clone https://github.com/appropont/fireminder`
 * `cd fireminder`
 * `npm install`
 * `bower install`
 
 ## Running / Development
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+* `ember electron`
 
 ### Code Generators
 
 Make use of the many generators for code, try `ember help generate` for more details
 
-### Running Tests
+### Packaging
 
-* `ember test`
-* `ember test --server`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
+* `ember electron:package`
 
 ## Further Reading / Useful Links
 
 * [ember.js](http://emberjs.com/)
 * [ember-cli](https://ember-cli.com/)
+* [ember-electron](https://github.com/felixrieseberg/ember-electron)
 * Development Browser Extensions
   * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
   * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+
+
+## License
+This project is licensed under the [MIT License](LICENSE).
