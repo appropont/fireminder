@@ -12,7 +12,7 @@
     <div class="field">
       <div class="ui toggle checkbox">
         {{input type="checkbox" name="enable-email-notifications" checked=enableEmailNotifications }}
-        <label>Email (via Mailgun)</label>
+        <label>Email (<a href="#" {{action "loadExternalLink" "https://www.mailgun.com/"}}>via Mailgun</a>)</label>
       </div>
     </div>
 
@@ -70,7 +70,7 @@
     <div class="field">
       <div class="ui toggle checkbox">
         {{input type="checkbox" name="enable-sms-notifications" checked=enableSMSNotifications }}
-        <label>SMS (via Twilio)</label>
+        <label>SMS (<a href="#" {{action "loadExternalLink" "https://www.twilio.com/"}}>via Twilio</a>)</label>
       </div>
     </div>
 

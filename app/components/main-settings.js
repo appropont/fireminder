@@ -42,6 +42,9 @@ export default Ember.Component.extend({
     },
     cancel() {
       this.get('cancel')();
+    },
+    loadExternalLink(link) {
+      require('electron').shell.openExternal(link);
     }
   },
 

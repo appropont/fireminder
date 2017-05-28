@@ -9,6 +9,19 @@ input, button {
   -webkit-app-region: no-drag;
 }
 
+a {
+  color: $orange;
+
+  &:hover {
+    color: darken($orange, 5);
+  }
+
+  &:focus {
+    color: darken($orange, 10);
+  }
+
+}
+
 .ui.segment {
   //background: $primary-background;
   background: $light-yellow;
