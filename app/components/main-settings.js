@@ -41,6 +41,10 @@ export default Ember.Component.extend({
       this.get('save')(values);
     },
     cancel() {
+      const oldSettings = this.get("settings").content;
+      fields.map((field) => {
+        this.set(field, oldSettings[field]);
+      });
       this.get('cancel')();
     },
     loadExternalLink(link) {
