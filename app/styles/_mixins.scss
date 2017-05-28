@@ -14,8 +14,10 @@
     background: darken($orange, 5);
     color: $light-yellow;
   }
+
   &:focus {
     background: darken($orange, 10);
     color: $light-yellow;
   }
+
 }
